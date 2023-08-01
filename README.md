@@ -14,8 +14,13 @@
   - STD_Types 
   - BIT_Math LIB
 - **📂Projects**
-  ### The software used 
+  ### software used 
   ( [VS Code](https://code.visualstudio.com) With [Platformio](https://platformio.org/install/ide?install=vscode) ) & ( [Proteus 8](https://www.labcenter.com) For Simulation) 
+  -
+  - 2 7seg multiplexing with SW
+  - LED converging
+  - LED Flash_Every500MS
+  - LED ShiflLeftEvery250MS
 
 
 
