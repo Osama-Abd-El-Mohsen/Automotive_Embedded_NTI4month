@@ -27,5 +27,6 @@ typedef double f64;
 #define BUSY_FUNC 3
 #define NULL_POINTER 0
 #define NULL_FUNC 5
+#define ZERO 0
 
 #endif
