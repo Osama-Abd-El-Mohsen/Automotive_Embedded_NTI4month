@@ -8,7 +8,7 @@
   - LED
   - Switchs
   - 7SEG
-  - LCD (Basic Function) (Still Working on it)
+  - LCD (Basic Function) (Still in progress)
 - **LIB**
   - STD_Types 
   - BIT_Math LIB
