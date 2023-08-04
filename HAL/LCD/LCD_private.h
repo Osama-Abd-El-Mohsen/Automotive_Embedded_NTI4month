@@ -10,6 +10,13 @@
 #ifndef LCD_PRIVATE_H_
 #define LCD_PRIVATE_H_
 
+/*=============MAGIC NUMS============= */
+#define DDRAM_FIRST_COL_ADD 0x80
+#define DDRAM_2ND_COL_ADD 0xc0
+#define ZERO_ASCII_CODE '0'
+#define TEN_VAL 10
+#define CGRAM_SC_SIZE 8
+#define CGRAM_ADD 64
 
 /*=============INIT=============*/
 /*clear LCD*/
