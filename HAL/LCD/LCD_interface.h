@@ -58,6 +58,17 @@ void LCD_voidClear(void);
 /*LCD_ReturnHome*/
 void LCD_voidReturnHome(void);
 
+/*LCD change cursor position*/
+u8 LCD_u8GoToRow_Col(u8 Copy_u8Row, u8 Copy_u8Col);
+
+/*LCD send integer number*/
+u8 LCD_u8SendInt(u8 Copy_u8Row, u8 Copy_u8Col, u8 Copy_u8Int);
+
+/*LCD send spechial character*/
+void LCD_voidWriteSpechialChar(u8 *Copy_u8Pattern, u8 Copy_u8Patternnumber, u8 Copy_u8Row, u8 Copy_u8Col);
+
+
+
 /*LCD_Turnon and off*/
 void LCD_voidTurnOn(void);
 void LCD_voidTurnOff(void);

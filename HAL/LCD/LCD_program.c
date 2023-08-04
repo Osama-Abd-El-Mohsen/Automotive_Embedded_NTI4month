@@ -42,17 +42,15 @@ void LCD_voidTurnOff(void)
 
 void LCD_voidINIT(void)
 {
-    /*clearing and reutern cursor to home */
-    LCD_voidSendCommand(LCD_CLR_SCREEN);
-    LCD_voidSendCommand(LCD_RETURN_HOME);
-    LCD_voidSendCommand(LCD_TURN_ON);
-
     /* setting data port and controll pins directions */
     DIO_u8SetPortDirection(LCD_DATA_PORT, DIO_PORT_OUTPUT);
     DIO_u8SetPinDirection(LCD_CONTROLL_PORT, LCD_RS_BIN, DIO_PIN_OUTPUT);
     DIO_u8SetPinDirection(LCD_CONTROLL_PORT, LCD_RW_BIN, DIO_PIN_OUTPUT);
     DIO_u8SetPinDirection(LCD_CONTROLL_PORT, LCD_ENABLE_BIN, DIO_PIN_OUTPUT);
 
+    _delay_ms(20);
+    /*clearing and reutern cursor to home */
+    LCD_voidSendCommand(LCD_TURN_ON);
     /* config LCD INIT modes */
 #if LCD_BIT_MODE == LCD_FUNCTION_SET_8BIT
     SET_BIT(LCD_FUNCTION_SET_VALUE, LCD_FUNCTION_SET_DL_BIT);
@@ -71,6 +69,10 @@ void LCD_voidINIT(void)
 #elif LCD_DISPLAY_LINE_MODE == LCD_FUNCTION_SET_DISPLAY_LINE_5_11
     SET_BIT(LCD_FUNCTION_SET_VALUE, LCD_FUNCTION_SET_F_BIT);
 #endif
+
+    LCD_voidSendCommand(LCD_CLR_SCREEN);
+    LCD_voidSendCommand(LCD_RETURN_HOME);
+
     /*setting RS , RW pins initial values to zero*/
     DIO_u8SetPinValue(LCD_CONTROLL_PORT, LCD_RS_BIN, DIO_PIN_LOW);
     DIO_u8SetPinValue(LCD_CONTROLL_PORT, LCD_RW_BIN, DIO_PIN_LOW);
@@ -106,21 +108,28 @@ void LCD_voidSendData(u8 Copy_u8Data)
     DIO_u8SetPinValue(LCD_CONTROLL_PORT, LCD_ENABLE_BIN, DIO_PIN_LOW);
     DIO_u8SetPinValue(LCD_CONTROLL_PORT, LCD_RS_BIN, DIO_PIN_LOW);
 }
+
 u8 LCD_u8SendString(u8 *Copy_pu8String)
 {
     /*declaring error state variable */
     u8 Local_u8ErrorState = OK;
-    u8 Local_u8Counter= ZERO;
-    while (*(Copy_pu8String+Local_u8Counter) != '\0')
+    u8 Local_u8Counter = ZERO;
+    while (*(Copy_pu8String + Local_u8Counter) != '\0')
     {
-        LCD_voidSendData(*(Copy_pu8String+Local_u8Counter));
+        LCD_voidSendData(*(Copy_pu8String + Local_u8Counter));
         Local_u8Counter++;
     }
-    
 
     return Local_u8ErrorState;
 }
 
+/* ENTRY_MODE Set Mode
+Options :
+LCD_ENTRY_MODE_INC_SH_RIGHT
+LCD_ENTRY_MODE_DNC_SH_LEFT
+LCD_ENTRY_MODE_INC_NO_SH
+LCD_ENTRY_MODE_DNC_NO_SH
+*/
 u8 LCD_u8EntryMode(u8 Copy_u8Mode)
 {
     /*declaring error state variable */
@@ -255,4 +264,64 @@ u8 LCD_u8DisplayShift(u8 Copy_u8Mode)
     /*apply modes*/
     LCD_voidSendCommand(LCD_CODS_VALUE);
     return Local_u8ErrorState;
+}
+
+u8 LCD_u8GoToRow_Col(u8 Copy_u8Row, u8 Copy_u8Col)
+{
+    if (Copy_u8Row == ZERO)
+    {
+        LCD_voidSendCommand(DDRAM_FIRST_COL_ADD + Copy_u8Col);
+    }
+    else
+        LCD_voidSendCommand(DDRAM_2ND_COL_ADD + Copy_u8Col);
+}
+
+u8 LCD_u8SendInt(u8 Copy_u8Row, u8 Copy_u8Col, u8 Copy_u8Int)
+{
+    u8 Local_u8RemindNum = ONE;
+    u8 Local_u8Counter = ZERO;
+    u8 Copy_u8Int2 = Copy_u8Int;
+
+    /*Getting int lenght*/
+    while (Copy_u8Int2 != ZERO)
+    {
+        Local_u8RemindNum = Copy_u8Int % TEN_VAL;
+        Copy_u8Int2 = Copy_u8Int2 / TEN_VAL;
+        Local_u8Counter++;
+    }
+
+    /*printing int*/
+    while (Copy_u8Int != ZERO)
+    {
+        LCD_u8GoToRow_Col(Copy_u8Row, Copy_u8Col + Local_u8Counter);
+
+        Local_u8RemindNum = Copy_u8Int % TEN_VAL;
+        Copy_u8Int = Copy_u8Int / TEN_VAL;
+        LCD_voidSendData(ZERO_ASCII_CODE + Local_u8RemindNum);
+        Local_u8Counter--;
+    }
+}
+
+void LCD_voidWriteSpechialChar(u8 *Copy_u8Pattern, u8 Copy_u8Patternnumber, u8 Copy_u8Row, u8 Copy_u8Col)
+{
+    if (Copy_u8Patternnumber <= CGRAM_SC_SIZE)
+    {
+        u8 Local_u8Counter;
+
+        /*setting CGRAM Start Addresse */
+        u8 Local_u8CGRAMAddress = Copy_u8Patternnumber * CGRAM_SC_SIZE;
+
+        /*setting CGRAM Addresse */
+        LCD_voidSendCommand(Local_u8CGRAMAddress + CGRAM_ADD);
+
+        /*Entering Spechial Char Data */
+        for (Local_u8Counter = ZERO; Local_u8Counter < CGRAM_SC_SIZE; Local_u8Counter++)
+        {
+            LCD_voidSendData(Copy_u8Pattern[Local_u8Counter]);
+        }
+
+        /*Display Spechial Char  */
+        LCD_u8GoToRow_Col(Copy_u8Row, Copy_u8Col);
+        LCD_voidSendData(Copy_u8Patternnumber);
+    }
 }
