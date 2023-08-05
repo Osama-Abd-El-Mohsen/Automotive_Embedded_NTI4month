@@ -28,5 +28,8 @@ typedef double f64;
 #define NULL_POINTER 0
 #define NULL_FUNC 5
 #define ZERO 0
+#define ONE 1
+#define TWO 2
+
 
 #endif

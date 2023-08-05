@@ -67,7 +67,9 @@ u8 LCD_u8SendInt(u8 Copy_u8Row, u8 Copy_u8Col, u8 Copy_u8Int);
 /*LCD send spechial character*/
 void LCD_voidWriteSpechialChar(u8 *Copy_u8Pattern, u8 Copy_u8Patternnumber, u8 Copy_u8Row, u8 Copy_u8Col);
 
-
+/*LCD_SEND_COMMAND*/
+void LCD_voidSendData(u8 Copy_u8Data);
+u8 LCD_u8SendString(u8 Copy_u8Row, u8 Copy_u8Col, u8 *Copy_pu8String);
 
 /*LCD_Turnon and off*/
 void LCD_voidTurnOn(void);
@@ -76,9 +78,6 @@ void LCD_voidTurnOff(void);
 /*LCD_SEND_COMMAND*/
 void LCD_voidSendCommand(u8 Copy_u8Command);
 
-/*LCD_SEND_COMMAND*/
-void LCD_voidSendData(u8 Copy_u8Data);
-u8 LCD_u8SendString(u8 *Copy_pu8String);
 /* ENTRY_MODE Set Mode
 Options :
 LCD_ENTRY_MODE_INC_SH_RIGHT

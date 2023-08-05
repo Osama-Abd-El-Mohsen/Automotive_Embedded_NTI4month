@@ -10,6 +10,7 @@
   - Switchs
   - 7SEG
   - LCD 
+  - KPD
 - **📚 LIB**
   - STD_Types 
   - BIT_Math LIB

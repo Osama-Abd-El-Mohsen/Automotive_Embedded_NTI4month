@@ -17,6 +17,8 @@
 #define TEN_VAL 10
 #define CGRAM_SC_SIZE 8
 #define CGRAM_ADD 64
+#define LCD_LAST_COL_INDEX 16
+#define LCD_LAST_RAW_INDEX 2
 
 /*=============INIT=============*/
 /*clear LCD*/
