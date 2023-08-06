@@ -1,9 +1,9 @@
 /*************************************************************/
 /*************************************************************/
 /***********    Author :    Osama Abd EL Mohsen    ***********/
-/***********    Layer  :    MCAL				   ***********/
-/***********    SWC    :    ADC_INTERFACE_H 	   ***********/
-/***********    Version:    1.00			       ***********/
+/***********    Layer  :    MCAL                   ***********/
+/***********    SWC    :    ADC_INTERFACE_H        ***********/
+/***********    Version:    1.00                   ***********/
 /*************************************************************/
 /*************************************************************/
 
@@ -22,14 +22,14 @@
 
 /*************************************************************/
 /**    Description :    Initialization ADC                  **/
-/**    Return      :    void				                **/
-/**    Parameters  :    void				                **/
+/**    Return      :    void                                **/
+/**    Parameters  :    void                                **/
 /*************************************************************/
 void ADC_voidInit(void);
 
 /*************************************************************/
 /**    Description :    Getting chhannel reading            **/
-/**    Return      :    Errorstate reading in memory	    **/
+/**    Return      :    Errorstate reading in memory        **/
 /**    Parameters  :    ADC channel variable address        **/
 /*************************************************************/
 u8 ADC_u8GetChannelReading(u8 Copy_u8Channel, u16 *Copy_pu16Reading);

@@ -52,36 +52,36 @@
 
 /*************************************************************/
 /**    Description :    Initialization LCD 8 or 4 Bit       **/
-/**    Return      :    void				                **/
-/**    Parameters  :    void				                **/
+/**    Return      :    void                                **/
+/**    Parameters  :    void                                **/
 /*************************************************************/
 void LCD_voidINIT(void);
 
 /*************************************************************/
 /**    Description :    Clear LCD                           **/
-/**    Return      :    void				                **/
-/**    Parameters  :    void				                **/
+/**    Return      :    void                                **/
+/**    Parameters  :    void                                **/
 /*************************************************************/
 void LCD_voidClear(void);
 
 /*LCD_ReturnHome*/
 /*************************************************************/
 /**    Description :    Ruturn cursor to home 0,0 position  **/
-/**    Return      :    void				                **/
-/**    Parameters  :    void				                **/
+/**    Return      :    void                                **/
+/**    Parameters  :    void                                **/
 /*************************************************************/
 void LCD_voidReturnHome(void);
 
 /*************************************************************/
 /**    Description :    Changing LCD cursor position        **/
-/**    Return      :    void				                **/
+/**    Return      :    void                                **/
 /**    Parameters  :    Row & Colume position               **/
 /*************************************************************/
 void LCD_voidGoToRow_Col(u8 Copy_u8Row, u8 Copy_u8Col);
 
 /*************************************************************/
 /**    Description :    Display integer number on LCD       **/
-/**    Return      :    void				                **/
+/**    Return      :    void                                **/
 /**    Parameters  :    Row,Colume position and int number  **/
 /*************************************************************/
 void LCD_voidSendInt(u8 Copy_u8Row, u8 Copy_u8Col, u8 Copy_u8Int);
@@ -96,15 +96,15 @@ void LCD_voidWriteSpechialChar(u8 *Copy_u8Pattern, u8 Copy_u8Patternnumber, u8 C
 
 /*************************************************************/
 /**    Description :    Send data on LCD                    **/
-/**    Return      :    void			                    **/
-/**    Parameters  :    data     		                    **/
+/**    Return      :    void                                **/
+/**    Parameters  :    data                                **/
 /*************************************************************/
 void LCD_voidSendData(u8 Copy_u8Data);
 
 /*************************************************************/
 /**    Description :    Send command on LCD                 **/
-/**    Return      :    void			                    **/
-/**    Parameters  :    command     		                **/
+/**    Return      :    void                                **/
+/**    Parameters  :    command                             **/
 /*************************************************************/
 void LCD_voidSendCommand(u8 Copy_u8Command);
 
