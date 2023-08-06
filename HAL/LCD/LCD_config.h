@@ -1,42 +1,60 @@
 /*************************************************************/
 /*************************************************************/
 /***********    Author :    Osama Abd EL Mohsen    ***********/
-/***********    Layer  :    HAL				       ***********/
-/***********    SWC    :    LCD_CONFIG_H     		***********/
-/***********    Version:    1.00			       ***********/
+/***********    Layer  :    HAL                    ***********/
+/***********    SWC    :    LCD_CONFIG             ***********/
+/***********    Version:    1.00                   ***********/
 /*************************************************************/
 /*************************************************************/
 
+/*Preprossesor file guard*/
 #ifndef LCD_CONFIG_H_
 #define LCD_CONFIG_H_
 
 /*INIT LCD
-LCD_BIT_MODE 
-Options :
+===========================
+        LCD_BIT_MODE 
+        OPTIONS 
+===========================
+1- LCD_FUNCTION_SET_8BIT
+2- LCD_FUNCTION_SET_4BIT
 
-LCD_FUNCTION_SET_8BIT
-LCD_FUNCTION_SET_4BIT
+===========================
+        LCD_LINE_MODE OPTIONS 
+===========================
+1- LCD_FUNCTION_SET_1LINE_CONTROL
+2- LCD_FUNCTION_SET_2LINE_CONTROL
 
-LCD_LINE_MODE
-Options:
-LCD_FUNCTION_SET_1LINE_CONTROL
-LCD_FUNCTION_SET_2LINE_CONTROL
-
-LCD_DISPLAY_LINE_MODE
-Oprtions:
-LCD_FUNCTION_SET_DISPLAY_LINE_5_8
-LCD_FUNCTION_SET_DISPLAY_LINE_5_11
+===========================
+        LCD_DISPLAY_LINE_MODE
+        OPTIONS 
+===========================
+1- LCD_FUNCTION_SET_DISPLAY_LINE_5_8
+2- LCD_FUNCTION_SET_DISPLAY_LINE_5_11
 */
 #define LCD_BIT_MODE  LCD_FUNCTION_SET_8BIT
 #define LCD_LINE_MODE  LCD_FUNCTION_SET_2LINE_CONTROL
 #define LCD_DISPLAY_LINE_MODE  LCD_FUNCTION_SET_DISPLAY_LINE_5_8
 
 /*Confgi Data & Controll Ports And Bins
-PORT options:
-DIO_PORTA
-DIO_PORTB
-DIO_PORTC
-DIO_PORTD
+===========================
+        PORT OPTIONS 
+===========================
+1- DIO_PORTA
+2- DIO_PORTB
+3- DIO_PORTC
+4- DIO_PORTD
+===========================
+        PINS OPTIONS
+===========================
+1- DIO_PIN0
+2- DIO_PIN1
+3- DIO_PIN2
+4- DIO_PIN3
+5- DIO_PIN4
+6- DIO_PIN5
+7- DIO_PIN6
+8- DIO_PIN7
 */
 
 #define LCD_CONTROLL_PORT DIO_PORTC

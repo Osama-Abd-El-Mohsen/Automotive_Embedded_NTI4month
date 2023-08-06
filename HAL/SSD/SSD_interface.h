@@ -1,7 +1,7 @@
 /*************************************************************/
 /*************************************************************/
 /***********    Author :    Osama Abd EL Mohsen    ***********/
-/***********    Layer  :    MCAL				   ***********/
+/***********    Layer  :    HAL 				   ***********/
 /***********    SWC    :    SSD_INTERFACE 		   ***********/
 /***********    Version:    1.00			       ***********/
 /*************************************************************/
@@ -34,10 +34,36 @@ typedef struct
 } SSD_t;
 
 
-
-
+/*************************************************************/
+/**    Description :  Display value on SSD                  **/
+/**    Return      :  Errorstate                            **/
+/**    Parameters  :  Takeing SSD_T info struct and value   **/
+/**    Options     :                                        **/
+/**                 01-SSD_DISNUM0                          **/
+/**                 02-SSD_DISNUM1                          **/
+/**                 03-SSD_DISNUM2                          **/
+/**                 04-SSD_DISNUM3                          **/
+/**                 05-SSD_DISNUM4                          **/
+/**                 06-SSD_DISNUM5                          **/
+/**                 07-SSD_DISNUM6                          **/
+/**                 08-SSD_DISNUM7                          **/
+/**                 09-SSD_DISNUM8                          **/
+/**                 10-SSD_DISNUM9                          **/
+/*************************************************************/
 u8 SSD_u8Display(SSD_t *Copy_SSD, u8 Copy_u8Value);
+
+/*************************************************************/
+/**    Description :  Enable and Disable SSD (multiplexing) **/
+/**    Return      :  Errorstate                            **/
+/**    Parameters  :  Takeing SSD_T info struct             **/
+/*************************************************************/
 u8 SSD_u8Enable(SSD_t *Copy_SSD);
 u8 SSD_u8Disable(SSD_t *Copy_SSD);
+
+/*************************************************************/
+/**    Description :  Clearring SSD                         **/
+/**    Return      :  Errorstate                            **/
+/**    Parameters  :  Takeing SSD_T info struct             **/
+/*************************************************************/
 u8 SSD_u8Clear(SSD_t *Copy_SSD);
 #endif

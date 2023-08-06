@@ -14,7 +14,7 @@
 #include "KPD_interface.h"
 #include "DIO/DIO_interface.h"
 
-void KPD_u8iniit()
+void KPD_u8iniit(void)
 {
     /*define rows as input and colms as outputs*/
     DIO_u8SetPortDirection(KPD_PORT, 0X0F);

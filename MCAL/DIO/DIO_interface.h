@@ -38,12 +38,72 @@
 #define DIO_PIN6 6
 #define DIO_PIN7 7
 
+/*************************************************************/
+/**    Description :  Config pin and port direction         **/
+/**    Return      :  Errorstate                            **/
+/**    Parameters  :  Port,(pin),input or output            **/
+/**    Options     :                                        **/
+/**             Port Options:                               **/
+/**                 1-DIO_PORTA                             **/
+/**                 2-DIO_PORTB                             **/
+/**                 3-DIO_PORTC                             **/
+/**                 4-DIO_PORTD                             **/
+/**             Pin Options:                                **/
+/**                 1-DIO_PIN0                              **/
+/**                 2-DIO_PIN1                              **/
+/**                 3-DIO_PIN2                              **/
+/**                 4-DIO_PIN3                              **/
+/**                 5-DIO_PIN4                              **/
+/**                 6-DIO_PIN5                              **/
+/**                 7-DIO_PIN6                              **/
+/**                 8-DIO_PIN7                              **/
+/*************************************************************/
 u8 DIO_u8SetPinDirection(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8Dir);
 u8 DIO_u8SetPortDirection(u8 Copy_u8Port, u8 Copy_u8Dir);
 
+/*************************************************************/
+/**    Description :  Config pin and port value             **/
+/**    Return      :  Errorstate                            **/
+/**    Parameters  :  Port,(pin),high or low                **/
+/**    Options     :                                        **/
+/**             Port Options:                               **/
+/**                 1-DIO_PORTA                             **/
+/**                 2-DIO_PORTB                             **/
+/**                 3-DIO_PORTC                             **/
+/**                 4-DIO_PORTD                             **/
+/**             Pin Options:                                **/
+/**                 1-DIO_PIN0                              **/
+/**                 2-DIO_PIN1                              **/
+/**                 3-DIO_PIN2                              **/
+/**                 4-DIO_PIN3                              **/
+/**                 5-DIO_PIN4                              **/
+/**                 6-DIO_PIN5                              **/
+/**                 7-DIO_PIN6                              **/
+/**                 8-DIO_PIN7                              **/
+/*************************************************************/
 u8 DIO_u8SetPinValue(u8 Copy_u8Port, u8 Copy_u8Pin, u8 Copy_u8Val);
 u8 DIO_u8SetPortValue(u8 Copy_u8Port, u8 Copy_u8Val);
 
+/*************************************************************/
+/**    Description :  Getting pin value                     **/
+/**    Return      :  Errorstate , pin value in the memory  **/
+/**    Parameters  :  Port,(pin),high or variable address   **/
+/**    Options     :                                        **/
+/**             Port Options:                               **/
+/**                 1-DIO_PORTA                             **/
+/**                 2-DIO_PORTB                             **/
+/**                 3-DIO_PORTC                             **/
+/**                 4-DIO_PORTD                             **/
+/**             Pin Options:                                **/
+/**                 1-DIO_PIN0                              **/
+/**                 2-DIO_PIN1                              **/
+/**                 3-DIO_PIN2                              **/
+/**                 4-DIO_PIN3                              **/
+/**                 5-DIO_PIN4                              **/
+/**                 6-DIO_PIN5                              **/
+/**                 7-DIO_PIN6                              **/
+/**                 8-DIO_PIN7                              **/
+/*************************************************************/
 u8 DIO_u8GetPinValue(u8 Copy_u8Port, u8 Copy_u8Pin, u8 *Copy_pu8Value);
 
 #endif

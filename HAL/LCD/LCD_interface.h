@@ -1,12 +1,13 @@
 /*************************************************************/
 /*************************************************************/
 /***********    Author :    Osama Abd EL Mohsen    ***********/
-/***********    Layer  :    HAL 				   ***********/
-/***********    SWC    :    LCD_INTERFACE 		   ***********/
-/***********    Version:    1.00			       ***********/
+/***********    Layer  :    HAL                    ***********/
+/***********    SWC    :    LCD_INTERFACE          ***********/
+/***********    Version:    1.00                   ***********/
 /*************************************************************/
 /*************************************************************/
 
+/*Preprossesor file guard*/
 #ifndef LCD_INTERFACE_H_
 #define LCD_INTERFACE_H_
 
@@ -49,65 +50,121 @@
 #define LCD_FUNCTION_SET_DISPLAY_LINE_5_8 5
 #define LCD_FUNCTION_SET_DISPLAY_LINE_5_11 11
 
-/*LCD_INIT*/
+/*************************************************************/
+/**    Description :    Initialization LCD 8 or 4 Bit       **/
+/**    Return      :    void				                **/
+/**    Parameters  :    void				                **/
+/*************************************************************/
 void LCD_voidINIT(void);
 
-/*LCD_CLR*/
+/*************************************************************/
+/**    Description :    Clear LCD                           **/
+/**    Return      :    void				                **/
+/**    Parameters  :    void				                **/
+/*************************************************************/
 void LCD_voidClear(void);
 
 /*LCD_ReturnHome*/
+/*************************************************************/
+/**    Description :    Ruturn cursor to home 0,0 position  **/
+/**    Return      :    void				                **/
+/**    Parameters  :    void				                **/
+/*************************************************************/
 void LCD_voidReturnHome(void);
 
-/*LCD change cursor position*/
-u8 LCD_u8GoToRow_Col(u8 Copy_u8Row, u8 Copy_u8Col);
+/*************************************************************/
+/**    Description :    Changing LCD cursor position        **/
+/**    Return      :    void				                **/
+/**    Parameters  :    Row & Colume position               **/
+/*************************************************************/
+void LCD_voidGoToRow_Col(u8 Copy_u8Row, u8 Copy_u8Col);
 
-/*LCD send integer number*/
-u8 LCD_u8SendInt(u8 Copy_u8Row, u8 Copy_u8Col, u8 Copy_u8Int);
+/*************************************************************/
+/**    Description :    Display integer number on LCD       **/
+/**    Return      :    void				                **/
+/**    Parameters  :    Row,Colume position and int number  **/
+/*************************************************************/
+void LCD_voidSendInt(u8 Copy_u8Row, u8 Copy_u8Col, u8 Copy_u8Int);
 
-/*LCD send spechial character*/
+/*************************************************************/
+/**    Description :    Display spechial character on LCD   **/
+/**    Return      :    void                                **/
+/**    Parameters  :    character patternArray,patternNumber**/
+/**    & row,col position                                   **/
+/*************************************************************/
 void LCD_voidWriteSpechialChar(u8 *Copy_u8Pattern, u8 Copy_u8Patternnumber, u8 Copy_u8Row, u8 Copy_u8Col);
 
-/*LCD_SEND_COMMAND*/
+/*************************************************************/
+/**    Description :    Send data on LCD                    **/
+/**    Return      :    void			                    **/
+/**    Parameters  :    data     		                    **/
+/*************************************************************/
 void LCD_voidSendData(u8 Copy_u8Data);
+
+/*************************************************************/
+/**    Description :    Send command on LCD                 **/
+/**    Return      :    void			                    **/
+/**    Parameters  :    command     		                **/
+/*************************************************************/
+void LCD_voidSendCommand(u8 Copy_u8Command);
+
+/*************************************************************/
+/**    Description :    Display string on LCD               **/
+/**    Return      :    void                                **/
+/**    Parameters  :    row,colume position and the string  **/
+/*************************************************************/
 u8 LCD_u8SendString(u8 Copy_u8Row, u8 Copy_u8Col, u8 *Copy_pu8String);
 
-/*LCD_Turnon and off*/
+/*************************************************************/
+/**    Description :    turnning on or off LCD              **/
+/**    Return      :    void                                **/
+/**    Parameters  :    void                                **/
+/*************************************************************/
 void LCD_voidTurnOn(void);
 void LCD_voidTurnOff(void);
 
-/*LCD_SEND_COMMAND*/
-void LCD_voidSendCommand(u8 Copy_u8Command);
-
-/* ENTRY_MODE Set Mode
-Options :
-LCD_ENTRY_MODE_INC_SH_RIGHT
-LCD_ENTRY_MODE_DNC_SH_LEFT
-LCD_ENTRY_MODE_INC_NO_SH
-LCD_ENTRY_MODE_DNC_NO_SH
-*/
+/*************************************************************/
+/**    Description :    Changing entry mode                 **/
+/**    Return      :    Errorstate                          **/
+/**    Parameters  :    mode                                **/
+/**    Options     :                                        **/
+/**                 1-LCD_ENTRY_MODE_INC_SH_RIGHT           **/
+/**                 2-LCD_ENTRY_MODE_DNC_SH_LEFT            **/
+/**                 3-LCD_ENTRY_MODE_INC_NO_SH              **/
+/**                 4-LCD_ENTRY_MODE_DNC_NO_SH              **/
+/*************************************************************/
 u8 LCD_u8EntryMode(u8 Copy_u8Mode);
 
-/* CURSOR Mode
-Options :
-LCD_CURSOR_MODE_ON
-LCD_CURSOR_MODE_OFF
-*/
+/*************************************************************/
+/**    Description :    Changing cursor mode                **/
+/**    Return      :    Errorstate                          **/
+/**    Parameters  :    mode                                **/
+/**    Options     :                                        **/
+/**                 1-LCD_CURSOR_MODE_ON                    **/
+/**                 2-LCD_CURSOR_MODE_OFF                   **/
+/*************************************************************/
 u8 LCD_u8CursorMode(u8 Copy_u8Mode);
 
-/*Cursor Blink Modes
-Options :
-LCD_CURSOR_BLINK_MODE_ON
-LCD_CURSOR_BLINK_MODE_OFF
-*/
+/*************************************************************/
+/**    Description :    Changing cursor Blink Mode          **/
+/**    Return      :    Errorstate                          **/
+/**    Parameters  :    mode                                **/
+/**    Options     :                                        **/
+/**                 1-LCD_CURSOR_BLINK_MODE_ON              **/
+/**                 2-LCD_CURSOR_BLINK_MODE_OFF             **/
+/*************************************************************/
 u8 LCD_u8CursorBlinkMode(u8 Copy_u8Mode);
 
-/* DISPLAY SHIFT (CODS)  Modes
-Options :
-LCD_DISPLAY_SHIFT_CURSOR_LEFT
-LCD_DISPLAY_SHIFT_CURSOR_RIGHT
-LCD_DISPLAY_SHIFT_ALL_LEFT
-LCD_DISPLAY_SHIFT_ALL_RIGHT
-*/
+/*************************************************************/
+/**    Description :    Changing DISPLAY SHIFT (CODS)  Mode **/
+/**    Return      :    Errorstate                          **/
+/**    Parameters  :    mode                                **/
+/**    Options     :                                        **/
+/**                 1-LCD_DISPLAY_SHIFT_CURSOR_LEFT         **/
+/**                 2-LCD_DISPLAY_SHIFT_CURSOR_RIGHT        **/
+/**                 2-LCD_DISPLAY_SHIFT_ALL_LEFT            **/
+/**                 2-LCD_DISPLAY_SHIFT_ALL_RIGHT           **/
+/*************************************************************/
 u8 LCD_u8DisplayShift(u8 Copy_u8Mode);
 
 #endif

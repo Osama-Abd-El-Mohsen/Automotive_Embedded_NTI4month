@@ -1,9 +1,9 @@
 /*************************************************************/
 /*************************************************************/
 /***********    Author :    Osama Abd EL Mohsen    ***********/
-/***********    Layer  :    HAL				       ***********/
-/***********    SWC    :    LCD_PROGRAM 		   ***********/
-/***********    Version:    1.00			       ***********/
+/***********    Layer  :    HAL                    ***********/
+/***********    SWC    :    LCD_PROGRAM            ***********/
+/***********    Version:    1.00                   ***********/
 /*************************************************************/
 /*************************************************************/
 
@@ -20,26 +20,31 @@ u8 LCD_DISPLAY_ON_OFF_VALUE = 0b00001000;
 u8 LCD_CODS_VALUE = 0b00010011;
 u8 LCD_FUNCTION_SET_VALUE = 0b00100011;
 
+/*Clearing LCD*/
 void LCD_voidClear(void)
 {
     LCD_voidSendCommand(LCD_CLR_SCREEN);
 }
 
+/*Return Cursor to home (first col & first raw)*/
 void LCD_voidReturnHome(void)
 {
     LCD_voidSendCommand(LCD_RETURN_HOME);
 }
 
+/*turnning on LCD*/
 void LCD_voidTurnOn(void)
 {
     LCD_voidSendCommand(LCD_TURN_ON);
 }
 
+/*turnning off LCD*/
 void LCD_voidTurnOff(void)
 {
     LCD_voidSendCommand(LCD_TURN_OFF);
 }
 
+/*init lcd*/
 void LCD_voidINIT(void)
 {
     /* setting data port and controll pins directions */
@@ -48,10 +53,13 @@ void LCD_voidINIT(void)
     DIO_u8SetPinDirection(LCD_CONTROLL_PORT, LCD_RW_BIN, DIO_PIN_OUTPUT);
     DIO_u8SetPinDirection(LCD_CONTROLL_PORT, LCD_ENABLE_BIN, DIO_PIN_OUTPUT);
 
-    _delay_ms(20);
+    /*datasheet init delay more than 30 ms*/
+    _delay_ms(40);
+
     /*clearing and reutern cursor to home */
     LCD_voidSendCommand(LCD_TURN_ON);
-    /* config LCD INIT modes */
+
+/* config LCD INIT modes */
 #if LCD_BIT_MODE == LCD_FUNCTION_SET_8BIT
     SET_BIT(LCD_FUNCTION_SET_VALUE, LCD_FUNCTION_SET_DL_BIT);
 #elif LCD_BIT_MODE == LCD_FUNCTION_SET_4BIT
@@ -70,6 +78,7 @@ void LCD_voidINIT(void)
     SET_BIT(LCD_FUNCTION_SET_VALUE, LCD_FUNCTION_SET_F_BIT);
 #endif
 
+
     LCD_voidSendCommand(LCD_CLR_SCREEN);
     LCD_voidSendCommand(LCD_RETURN_HOME);
 
@@ -80,6 +89,7 @@ void LCD_voidINIT(void)
     LCD_voidSendCommand(LCD_FUNCTION_SET_VALUE);
 }
 
+/*sending command to lcd*/
 void LCD_voidSendCommand(u8 Copy_u8Command)
 {
     /*sending command*/
@@ -88,19 +98,27 @@ void LCD_voidSendCommand(u8 Copy_u8Command)
     /*set RS pin to low to send command*/
     DIO_u8SetPinValue(LCD_CONTROLL_PORT, LCD_RS_BIN, DIO_PIN_LOW);
 
-    /*Generating Enable Puls to send the Command */
+    /*set RW pin to low for write*/
+    DIO_u8SetPinValue(LCD_CONTROLL_PORT, LCD_RW_BIN, DIO_PIN_LOW);
+
+    /*Generating Enable Puls to send the Command and reading data */
     DIO_u8SetPinValue(LCD_CONTROLL_PORT, LCD_ENABLE_BIN, DIO_PIN_HIGH);
     _delay_ms(2);
     DIO_u8SetPinValue(LCD_CONTROLL_PORT, LCD_ENABLE_BIN, DIO_PIN_LOW);
 }
 
+/*sending data to lcd*/
 void LCD_voidSendData(u8 Copy_u8Data)
 {
-    /*sending data*/
-    DIO_u8SetPortValue(LCD_DATA_PORT, Copy_u8Data);
 
     /*set RS pin to high to send data*/
     DIO_u8SetPinValue(LCD_CONTROLL_PORT, LCD_RS_BIN, DIO_PIN_HIGH);
+
+    /*set RW pin to low for write*/
+    DIO_u8SetPinValue(LCD_CONTROLL_PORT, LCD_RW_BIN, DIO_PIN_LOW);
+
+    /*sending data*/
+    DIO_u8SetPortValue(LCD_DATA_PORT, Copy_u8Data);
 
     /*Generating Enable Puls to send the data */
     DIO_u8SetPinValue(LCD_CONTROLL_PORT, LCD_ENABLE_BIN, DIO_PIN_HIGH);
@@ -109,7 +127,8 @@ void LCD_voidSendData(u8 Copy_u8Data)
     DIO_u8SetPinValue(LCD_CONTROLL_PORT, LCD_RS_BIN, DIO_PIN_LOW);
 }
 
-u8 LCD_u8SendString(u8 Copy_u8Row, u8 Copy_u8Col, u8* Copy_pu8String)
+/*sending string to lcd*/
+u8 LCD_u8SendString(u8 Copy_u8Row, u8 Copy_u8Col, u8 *Copy_pu8String)
 {
     /*declaring error state variable */
     u8 Local_u8ErrorState = OK;
@@ -117,7 +136,7 @@ u8 LCD_u8SendString(u8 Copy_u8Row, u8 Copy_u8Col, u8* Copy_pu8String)
 
     while (*(Copy_pu8String + Local_u8Counter) != '\0')
     {
-        LCD_u8GoToRow_Col(Copy_u8Row, Copy_u8Col);
+        LCD_voidGoToRow_Col(Copy_u8Row, Copy_u8Col);
         LCD_voidSendData(*(Copy_pu8String + Local_u8Counter));
         Local_u8Counter++, Copy_u8Col++;
         if (Copy_u8Col == LCD_LAST_COL_INDEX)
@@ -128,12 +147,68 @@ u8 LCD_u8SendString(u8 Copy_u8Row, u8 Copy_u8Col, u8* Copy_pu8String)
             {
                 Copy_u8Row = ZERO;
             }
-
+            else
+                Local_u8ErrorState = NOK;
         }
-
+        else
+            Local_u8ErrorState = NOK;
     }
 
     return Local_u8ErrorState;
+}
+
+/*sending integer number to lcd*/
+void LCD_voidSendInt(u8 Copy_u8Row, u8 Copy_u8Col, u8 Copy_u8Int)
+{
+    u8 Local_u8RemindNum = ONE;
+    u8 Local_u8Counter = ZERO;
+    u8 Copy_u8Int2 = Copy_u8Int;
+
+    /*Getting int lenght*/
+    while (Copy_u8Int2 != ZERO)
+    {
+        Local_u8RemindNum = Copy_u8Int % TEN_VAL;
+        Copy_u8Int2 = Copy_u8Int2 / TEN_VAL;
+        Local_u8Counter++;
+    }
+
+    Local_u8Counter--;
+
+    /*printing int*/
+    while (Copy_u8Int != ZERO)
+    {
+        LCD_voidGoToRow_Col(Copy_u8Row, Copy_u8Col + Local_u8Counter);
+
+        Local_u8RemindNum = Copy_u8Int % TEN_VAL;
+        Copy_u8Int = Copy_u8Int / TEN_VAL;
+        LCD_voidSendData(ZERO_ASCII_CODE + Local_u8RemindNum);
+        Local_u8Counter--;
+    }
+}
+
+/*creating and sending spechial char to lcd*/
+void LCD_voidWriteSpechialChar(u8 *Copy_u8Pattern, u8 Copy_u8Patternnumber, u8 Copy_u8Row, u8 Copy_u8Col)
+{
+    if (Copy_u8Patternnumber <= CGRAM_SC_SIZE)
+    {
+        u8 Local_u8Counter;
+
+        /*setting CGRAM Start Addresse */
+        u8 Local_u8CGRAMAddress = Copy_u8Patternnumber * CGRAM_SC_SIZE;
+
+        /*setting CGRAM Addresse */
+        LCD_voidSendCommand(Local_u8CGRAMAddress + CGRAM_ADD);
+
+        /*Entering Spechial Char Data */
+        for (Local_u8Counter = ZERO; Local_u8Counter < CGRAM_SC_SIZE; Local_u8Counter++)
+        {
+            LCD_voidSendData(Copy_u8Pattern[Local_u8Counter]);
+        }
+
+        /*Display Spechial Char  */
+        LCD_voidGoToRow_Col(Copy_u8Row, Copy_u8Col);
+        LCD_voidSendData(Copy_u8Patternnumber);
+    }
 }
 
 /* ENTRY_MODE Set Mode
@@ -271,6 +346,7 @@ u8 LCD_u8DisplayShift(u8 Copy_u8Mode)
         break;
 
     default:
+        Local_u8ErrorState = NOK;
         break;
     }
 
@@ -279,62 +355,14 @@ u8 LCD_u8DisplayShift(u8 Copy_u8Mode)
     return Local_u8ErrorState;
 }
 
-u8 LCD_u8GoToRow_Col(u8 Copy_u8Row, u8 Copy_u8Col)
+void LCD_voidGoToRow_Col(u8 Copy_u8Row, u8 Copy_u8Col)
 {
     if (Copy_u8Row == ZERO)
     {
+        /*first line*/
         LCD_voidSendCommand(DDRAM_FIRST_COL_ADD + Copy_u8Col);
     }
     else
+        /*2nd line*/
         LCD_voidSendCommand(DDRAM_2ND_COL_ADD + Copy_u8Col);
-}
-
-u8 LCD_u8SendInt(u8 Copy_u8Row, u8 Copy_u8Col, u8 Copy_u8Int)
-{
-    u8 Local_u8RemindNum = ONE;
-    u8 Local_u8Counter = ZERO;
-    u8 Copy_u8Int2 = Copy_u8Int;
-
-    /*Getting int lenght*/
-    while (Copy_u8Int2 != ZERO)
-    {
-        Local_u8RemindNum = Copy_u8Int % TEN_VAL;
-        Copy_u8Int2 = Copy_u8Int2 / TEN_VAL;
-        Local_u8Counter++;
-    }
-
-    /*printing int*/
-    while (Copy_u8Int != ZERO)
-    {
-        LCD_u8GoToRow_Col(Copy_u8Row, Copy_u8Col + Local_u8Counter);
-
-        Local_u8RemindNum = Copy_u8Int % TEN_VAL;
-        Copy_u8Int = Copy_u8Int / TEN_VAL;
-        LCD_voidSendData(ZERO_ASCII_CODE + Local_u8RemindNum);
-        Local_u8Counter--;
-    }
-}
-
-void LCD_voidWriteSpechialChar(u8* Copy_u8Pattern, u8 Copy_u8Patternnumber, u8 Copy_u8Row, u8 Copy_u8Col)
-{
-    if (Copy_u8Patternnumber <= CGRAM_SC_SIZE)
-    {
-        u8 Local_u8Counter;
-
-        /*setting CGRAM Start Addresse */
-        u8 Local_u8CGRAMAddress = Copy_u8Patternnumber * CGRAM_SC_SIZE;
-
-        /*setting CGRAM Addresse */
-        LCD_voidSendCommand(Local_u8CGRAMAddress + CGRAM_ADD);
-
-        /*Entering Spechial Char Data */
-        for (Local_u8Counter = ZERO; Local_u8Counter < CGRAM_SC_SIZE; Local_u8Counter++)
-        {
-            LCD_voidSendData(Copy_u8Pattern[Local_u8Counter]);
-        }
-
-        /*Display Spechial Char  */
-        LCD_u8GoToRow_Col(Copy_u8Row, Copy_u8Col);
-        LCD_voidSendData(Copy_u8Patternnumber);
-    }
 }

@@ -10,10 +10,18 @@
 #ifndef KPD_INTERFACE_H_
 #define KPD_INTERFACE_H_
 
-/*init Keypad pins directions and init values*/
-void KPD_u8iniit();
+/*************************************************************/
+/**    Description :   Initialization keypad                **/
+/**    Return      :   void				                    **/
+/**    Parameters  :   void				                    **/
+/*************************************************************/
+void KPD_u8iniit(void);
 
-/*return pressed value with pointers*/
+/*************************************************************/
+/**    Description :  Initialization LCD 8 or 4 Bit         **/
+/**    Return      :  return pressed value in memory        **/
+/**    Parameters  :  variable address to returnValue in it **/
+/*************************************************************/
 void KPD_u8ReturnPressed(u8 *Copy_pu8Value);
 
 #endif
