@@ -6,6 +6,8 @@
 - **<img src="https://emoji.discadia.com/emojis/7896b70a-42c0-489d-9927-5ba0b0c619f3.PNG" alt="isolated" width="25" > MCAL**
   - DIO
   - ADC (basic functions)
+  - EXTI (External Interrupt)
+  - GIE (Global Interrupt)
 - **📀 HAL**
   - LED
   - Switchs
