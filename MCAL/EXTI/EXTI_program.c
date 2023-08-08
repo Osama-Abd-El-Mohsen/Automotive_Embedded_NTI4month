@@ -21,10 +21,12 @@ void (*EXTI_INT2_ISR_FUNC)(void) = NULL;
 
 u8 EXTI_u8INT0_Mode(u8 Copy_u8INT0Mode)
 {
+
     u8 Local_u8ErrorState = OK;
     if (Copy_u8INT0Mode < 4 && Copy_u8INT0Mode > 0)
     {
-        EXTI_MCUCR = Copy_u8INT0Mode;
+        EXTI_MCUCR_Reg->ISC0 = Copy_u8INT0Mode;
+        
     }
     else
         Local_u8ErrorState = NOK;
@@ -36,7 +38,7 @@ u8 EXTI_u8INT1_Mode(u8 Copy_u8INT1Mode)
     u8 Local_u8ErrorState = OK;
     if (Copy_u8INT1Mode < 4 && Copy_u8INT1Mode > 0)
     {
-        EXTI_MCUCR = Copy_u8INT1Mode << 2;
+        EXTI_MCUCR_Reg->ISC1 = Copy_u8INT1Mode;
     }
     else
         Local_u8ErrorState = NOK;

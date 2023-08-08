@@ -10,11 +10,21 @@
 #ifndef EXTI_REGISTER_H_
 #define EXTI_REGISTER_H_
 
-#define EXTI_MCUCR *((volatile u8 *)0x55)
-#define EXTI_MCUCR_ISC00 0
-#define EXTI_MCUCR_ISC01 1
-#define EXTI_MCUCR_ISC10 2
-#define EXTI_MCUCR_ISC11 3
+typedef union
+{
+    u8 ALLBITS;
+    struct
+    {
+        u8 ISC0 : 2;
+        u8 ISC1 : 2;
+    };
+
+} EXTI_MCUCR;
+
+volatile EXTI_MCUCR *EXTI_MCUCR_Reg = (volatile EXTI_MCUCR *)(0x55);
+
+
+
 
 #define EXTI_MCUCSR *((volatile u8 *)0x54)
 #define EXTI_MCUCR_ISC2 6

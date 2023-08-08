@@ -10,22 +10,13 @@
 #ifndef EXTI_INTERFACE_H_
 #define EXTI_INTERFACE_H_
 
-// typedef union
-// {
-//     u8 Allbits;
-//     struct
-//     {
-//         u8 ISC0 : 2;
-//         u8 ISC1 : 2
-//     };
 
-// } EXTI_MCUCR_t;
-// volatile EXTI_MCUCR_t EXTI_MCUCR = (volatile EXTI_MCUCR_t)(0x55);
 
-#define  EXTI_INT_LOGIC_LOW 0
-#define  EXTI_INT_LOGIC_HIGH 1
-#define  EXTI_INT_FALLING_EDGE 2
-#define  EXTI_INT_RISING_EDGE 3
+
+#define EXTI_INT_LOGIC_LOW 0
+#define EXTI_INT_LOGIC_HIGH 1
+#define EXTI_INT_FALLING_EDGE 2
+#define EXTI_INT_RISING_EDGE 3
 
 #define EXTI_INT2_FALLING_EDGE 2
 #define EXTI_INT2_RISING_EDGE 3
@@ -63,8 +54,8 @@ void EXTI_voidINT2_Disable(void);
 /**    Return      :    void                                **/
 /**    Parameters  :    pointer to function                 **/
 /*************************************************************/
-void EXTI_voidINT0_SetCallbackFunc(void (*Copy_pvInt0Func) (void));
-void EXTI_voidINT1_SetCallbackFunc(void (*Copy_pvInt1Func) (void));
-void EXTI_voidINT2_SetCallbackFunc(void (*Copy_pvInt2Func) (void));
+void EXTI_voidINT0_SetCallbackFunc(void (*Copy_pvInt0Func)(void));
+void EXTI_voidINT1_SetCallbackFunc(void (*Copy_pvInt1Func)(void));
+void EXTI_voidINT2_SetCallbackFunc(void (*Copy_pvInt2Func)(void));
 
 #endif
