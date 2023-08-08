@@ -84,7 +84,14 @@ void LCD_voidGoToRow_Col(u8 Copy_u8Row, u8 Copy_u8Col);
 /**    Return      :    void                                **/
 /**    Parameters  :    Row,Colume position and int number  **/
 /*************************************************************/
-void LCD_voidSendInt(u8 Copy_u8Row, u8 Copy_u8Col, u8 Copy_u8Int);
+void LCD_voidSendInt(u8 Copy_u8Row, u8 Copy_u8Col, u32 Copy_u32Int);
+
+/*************************************************************/
+/**    Description :    Display float number on LCD         **/
+/**    Return      :    void                                **/
+/**    Parameters  :    Row,Col position and float number   **/
+/*************************************************************/
+void LCD_voidSendFloat(u8 Copy_u8Row, u8 Copy_u8Col, f32 Copy_u32Float,u8 Copy_u8DigitNumber);
 
 /*************************************************************/
 /**    Description :    Display spechial character on LCD   **/

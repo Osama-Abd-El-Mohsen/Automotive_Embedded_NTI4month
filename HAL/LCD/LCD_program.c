@@ -15,6 +15,8 @@
 #include "LCD_interface.h"
 #include "util/delay.h"
 
+u32 Power(u8 Copy_u8base, u8 Copy_u8exponent);
+
 u8 LCD_ENTRY_MODE_VALUE = 0b00000100;
 u8 LCD_DISPLAY_ON_OFF_VALUE = 0b00001000;
 u8 LCD_CODS_VALUE = 0b00010011;
@@ -77,7 +79,6 @@ void LCD_voidINIT(void)
 #elif LCD_DISPLAY_LINE_MODE == LCD_FUNCTION_SET_DISPLAY_LINE_5_11
     SET_BIT(LCD_FUNCTION_SET_VALUE, LCD_FUNCTION_SET_F_BIT);
 #endif
-
 
     LCD_voidSendCommand(LCD_CLR_SCREEN);
     LCD_voidSendCommand(LCD_RETURN_HOME);
@@ -158,32 +159,68 @@ u8 LCD_u8SendString(u8 Copy_u8Row, u8 Copy_u8Col, u8 *Copy_pu8String)
 }
 
 /*sending integer number to lcd*/
-void LCD_voidSendInt(u8 Copy_u8Row, u8 Copy_u8Col, u8 Copy_u8Int)
+void LCD_voidSendInt(u8 Copy_u8Row, u8 Copy_u8Col, u32 Copy_u32Int)
 {
     u8 Local_u8RemindNum = ONE;
     u8 Local_u8Counter = ZERO;
-    u8 Copy_u8Int2 = Copy_u8Int;
+    u32 Copy_u32Int2 = Copy_u32Int;
 
     /*Getting int lenght*/
-    while (Copy_u8Int2 != ZERO)
+    while (Copy_u32Int2 != ZERO)
     {
-        Local_u8RemindNum = Copy_u8Int % TEN_VAL;
-        Copy_u8Int2 = Copy_u8Int2 / TEN_VAL;
+        Local_u8RemindNum = Copy_u32Int % TEN_VAL;
+        Copy_u32Int2 = Copy_u32Int2 / TEN_VAL;
         Local_u8Counter++;
     }
 
     Local_u8Counter--;
 
     /*printing int*/
-    while (Copy_u8Int != ZERO)
+    while (Copy_u32Int != ZERO)
     {
         LCD_voidGoToRow_Col(Copy_u8Row, Copy_u8Col + Local_u8Counter);
 
-        Local_u8RemindNum = Copy_u8Int % TEN_VAL;
-        Copy_u8Int = Copy_u8Int / TEN_VAL;
+        Local_u8RemindNum = Copy_u32Int % TEN_VAL;
+        Copy_u32Int = Copy_u32Int / TEN_VAL;
         LCD_voidSendData(ZERO_ASCII_CODE + Local_u8RemindNum);
         Local_u8Counter--;
     }
+}
+
+/*Display float number on lcd*/
+void LCD_voidSendFloat(u8 Copy_u8Row, u8 Copy_u8Col, f32 Copy_u32Float, u8 Copy_u8DigitNumber)
+{
+    u8 Local_u8RemindNum = ONE;
+    u8 Local_u8Counter = ZERO;
+    u32 Copy_u32Int2 = Copy_u32Float;
+
+    /*Getting float lenght*/
+    while (Copy_u32Int2 != ZERO)
+    {
+        Local_u8RemindNum = (u32)Copy_u32Float % TEN_VAL;
+        Copy_u32Int2 = Copy_u32Int2 / TEN_VAL;
+        Local_u8Counter++;
+    }
+
+    /*sending int part */
+    LCD_voidSendInt(Copy_u8Row, Copy_u8Col, (u32)Copy_u32Float);
+
+    /*go to postion after int part and sennding '.' */
+    LCD_voidGoToRow_Col(Copy_u8Row, Copy_u8Col + Local_u8Counter);
+    LCD_voidSendData('.');
+
+    /*converting float part into int part and display it*/
+    LCD_voidSendInt(Copy_u8Row, Copy_u8Col + Local_u8Counter + ONE, (u32)((Copy_u32Float - (u32)Copy_u32Float) * Power(10, Copy_u8DigitNumber)));
+}
+
+u32 Power(u8 Copy_u8base, u8 Copy_u8exponent)
+{
+    u32 Local_u8Result = ONE;
+    for (u8 Local_u8Counter = ONE; Local_u8Counter <= Copy_u8exponent; Local_u8Counter++)
+    {
+        Local_u8Result *= Copy_u8base;
+    }
+    return Local_u8Result;
 }
 
 /*creating and sending spechial char to lcd*/
