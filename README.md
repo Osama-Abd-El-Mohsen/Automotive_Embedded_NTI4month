@@ -21,7 +21,7 @@
   ### software used 
   ### ( [VS Code](https://code.visualstudio.com) With [Platformio](https://platformio.org/install/ide?install=vscode) ) & ( [Proteus 8](https://www.labcenter.com) For Simulation) 
   - 2 7seg multiplexing with SW
-  - LED converging
+  - LED converging 
   - LED Flash_Every500MS
   - LED ShiflLeftEvery250MS
 - # [LCD_Bullet_War_Game](https://github.com/Osama-Abd-El-Mohsen/Automotive_Embedded_NTI4month/tree/main/Projects/LCD_Bullet_War_Game)🚀
