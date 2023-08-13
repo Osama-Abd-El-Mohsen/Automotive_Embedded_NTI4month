@@ -16,7 +16,7 @@
   - KPD
 - **📚 LIB**
   - STD_Types 
-  - BIT_Math LIB
+  - BIT_Math
 # **📂Projects**
   ### software used 
   ### ( [VS Code](https://code.visualstudio.com) With [Platformio](https://platformio.org/install/ide?install=vscode) ) & ( [Proteus 8](https://www.labcenter.com) For Simulation) 
