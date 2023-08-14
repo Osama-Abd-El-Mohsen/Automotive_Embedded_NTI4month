@@ -8,6 +8,7 @@
   - ADC (basic functions)
   - EXTI (External Interrupt)
   - GIE (Global Interrupt)
+  - USART
 - **📀 HAL**
   - LED
   - Switchs

@@ -169,8 +169,8 @@ u8 LCD_u8CursorBlinkMode(u8 Copy_u8Mode);
 /**    Options     :                                        **/
 /**                 1-LCD_DISPLAY_SHIFT_CURSOR_LEFT         **/
 /**                 2-LCD_DISPLAY_SHIFT_CURSOR_RIGHT        **/
-/**                 2-LCD_DISPLAY_SHIFT_ALL_LEFT            **/
-/**                 2-LCD_DISPLAY_SHIFT_ALL_RIGHT           **/
+/**                 3-LCD_DISPLAY_SHIFT_ALL_LEFT            **/
+/**                 4-LCD_DISPLAY_SHIFT_ALL_RIGHT           **/
 /*************************************************************/
 u8 LCD_u8DisplayShift(u8 Copy_u8Mode);
 
