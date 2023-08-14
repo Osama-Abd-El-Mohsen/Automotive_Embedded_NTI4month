@@ -9,6 +9,7 @@
   - EXTI (External Interrupt)
   - GIE (Global Interrupt)
   - USART
+  - SPI
 - **📀 HAL**
   - LED
   - Switchs
