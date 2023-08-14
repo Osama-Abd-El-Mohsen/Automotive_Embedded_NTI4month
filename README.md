@@ -28,6 +28,9 @@
 - # [LCD_Bullet_War_Game](https://github.com/Osama-Abd-El-Mohsen/Automotive_Embedded_NTI4month/tree/main/Projects/LCD_Bullet_War_Game)🚀
 
 ![](https://github.com/Osama-Abd-El-Mohsen/Automotive_Embedded_NTI4month/blob/main/Projects/LCD_Bullet_War_Game/Gmae_GIF.gif?raw=true)
+- # [SPI_Master_Slave_Test ](https://github.com/Osama-Abd-El-Mohsen/Automotive_Embedded_NTI4month/tree/main/Projects/SPI_test)💬
+
+![](https://raw.githubusercontent.com/Osama-Abd-El-Mohsen/Automotive_Embedded_NTI4month/main/Projects/SPI_test/myFile8-14-2023_104322_PM.gif)
 
 
 
