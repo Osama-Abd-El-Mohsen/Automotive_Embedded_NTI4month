@@ -7,6 +7,9 @@
 /*************************************************************/
 /*************************************************************/
 
+#ifndef USART_CONFIG_H_
+#define USART_CONFIG_H_
+
 /*Double USART TR speed ASYNCHRONOUS only
 ===========================
             OPTIONS
@@ -69,3 +72,5 @@
 #define USART_FOSC  8000000
 /*set baudrate*/
 #define USART_BAUD  9600
+
+#endif

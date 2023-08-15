@@ -5,7 +5,10 @@
 /***********    SWC    :    USART_PRIVATE          ***********/
 /***********    Version:    1.00                   ***********/
 /*************************************************************/
+
 /*************************************************************/
+#ifndef USART_PRIVATE_H_
+#define USART_PRIVATE_H_
 
 #define USART_U2X_ENABLE 1
 #define USART_U2X_DISABLE 0
@@ -31,3 +34,5 @@
 
 #define ZERO_ASCII_CODE '0'
 #define TEN_VAL 10
+
+#endif
