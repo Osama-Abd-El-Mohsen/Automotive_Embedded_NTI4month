@@ -32,8 +32,10 @@
 # 2 [SPI_Master_Slave_Test ](https://github.com/Osama-Abd-El-Mohsen/Automotive_Embedded_NTI4month/tree/main/Projects/SPI_test)💬
 SPI Communication between Two Atmega32
  ## **Testing Drivers**  
- | 1. SPI |
- |  ---- |
+ 
+ | 1. SPI |2. LED|
+ |  ---- |---- |
+ 
 ![](https://raw.githubusercontent.com/Osama-Abd-El-Mohsen/Automotive_Embedded_NTI4month/main/Projects/SPI_test/myFile8-14-2023_104322_PM.gif)
 
 ---
