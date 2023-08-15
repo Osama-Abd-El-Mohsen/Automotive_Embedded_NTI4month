@@ -11,8 +11,8 @@
 | ADC `(basic functions)` |Switchs|BIT_Math|LED converging
 | EXTI `(External Interrupt)` |7SEG||LED Flash_Every500MS
 | GIE `(Global Interrupt)` |LCD||LED ShiflLeftEvery250MS
-| USART|KPD||[LCD_Bullet_War_Game](https://github.com/Osama-Abd-El-Mohsen/Automotive_Embedded_NTI4month/tree/main/Projects/LCD_Bullet_War_Game)🚀
-| SPI|||[SPI_Master_Slave_Test ](https://github.com/Osama-Abd-El-Mohsen/Automotive_Embedded_NTI4month/tree/main/Projects/SPI_test)💬
+| USART|KPD||[LCD_Bullet_War_Game](https://github.com/Osama-Abd-El-Mohsen/Automotive_Embedded_NTI4month/tree/main/Projects/LCD_Bullet_War_Game)🔝
+| SPI|||[SPI_Master_Slave_Test ](https://github.com/Osama-Abd-El-Mohsen/Automotive_Embedded_NTI4month/tree/main/Projects/SPI_test)🔝
 
 ---
 
